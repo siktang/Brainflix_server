@@ -9,8 +9,14 @@ const api_key = "?api_key=b61ec43f-16c2-4609-83d9-efae328d8e2e";
 
 const getVideoList = async () => {
     try {
-        const res = await axios.get(`${base_url}/videos/${api_key}`)
+        const res = await axios.get(`${base_url}/videos${api_key}`);
+        const videoList = JSON.stringify(res.data);
+        fs.writeFileSync("../data/videos.json", videoList);
     } catch (error) {
-        console.error(error);
+        fs.writeFileSync("./error.log", error);
     }
 }
+
+getVideoList();
+
+export default router;
