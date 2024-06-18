@@ -1,5 +1,7 @@
+import { channel } from "diagnostics_channel";
 import express from "express";
 import fs, { read } from "fs"; 
+import uniqid from "uniqid";
 
 const router = express.Router();
 
@@ -41,6 +43,28 @@ router.get("/:id", (req, res) => {
     }
 
     res.json(currentVideo);
+})
+
+router.post("/", (req, res) => {
+    const newVideo = {
+        id: uniqid(),
+        title: req.body.title,
+        channel: "Chanel",
+        image: "http://localhost:8080/images/Upload-video-preview.jpg",
+        description: req.body.description,
+        views: 0,
+        likes: 0,
+        duration: "4:01",
+        video: "https://unit-3-project-api-0a5620414506.herokuapp.com/stream",
+        timestamp: new Date(),
+        comments: []        
+    }
+
+    videoListData.push(newVideo);
+
+    writeVideos(videoListData);
+
+    res.status(201).json(newVideo);
 })
 
 export default router;
