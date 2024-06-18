@@ -1,7 +1,7 @@
 import express from "express";
-import axios from "axios";
 import fs from "fs";
 import cors from "cors";
+import videoRouter from "./routes/videos.js";
 import "dotenv/config";
 
 let { PORT } = process.env;
@@ -11,6 +11,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use('/images',express.static("public"));
+app.use("/videos", videoRouter); 
 
 
 app.listen(PORT, () => {
