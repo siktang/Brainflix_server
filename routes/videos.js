@@ -17,10 +17,9 @@ const writeVideos = (data) => {
 }
 
 // routes for getting and posting
+const videoListData = readVideos();
 
 router.get("/", (_req, res) => {
-    const videoListData = readVideos();
-
     const filteredData = videoListData.map((video) => {
         return {
             id: video.id,
@@ -35,7 +34,13 @@ router.get("/", (_req, res) => {
 
 router.get("/:id", (req, res) => {
     const { id } = req.params;
-    
+    const currentVideo = videoListData.find(video => video.id == id);
+
+    if (!currentVideo) {
+        return res.status(404).send("Video does not exist");
+    }
+
+    res.json(currentVideo);
 })
 
 export default router;
