@@ -46,11 +46,12 @@ router.get("/:id", (req, res) => {
 })
 
 router.post("/", (req, res) => {
+
     const newVideo = {
         id: uniqid(),
         title: req.body.title,
         channel: "Chanel",
-        image: "http://localhost:8080/images/Upload-video-preview.jpg",
+        image: req.body.image,
         description: req.body.description,
         views: 0,
         likes: 0,
@@ -63,7 +64,7 @@ router.post("/", (req, res) => {
     videoListData.push(newVideo);
 
     writeVideos(videoListData);
-
+    
     res.status(201).json(newVideo);
 })
 
