@@ -39,7 +39,7 @@ router.get("/:id", (req, res) => {
     const currentVideo = videoListData.find(video => video.id == id);
 
     if (!currentVideo) {
-        return res.status(404).send("Video does not exist");
+        return res.status(404).send("Uh oh! Video does not exist");
     }
 
     res.json(currentVideo);
